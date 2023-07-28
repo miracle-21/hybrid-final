@@ -1,0 +1,22 @@
+ansible_python_interpreter: /bin/python3
+
+vcenter_hostname: "192.168.3.101"
+vcenter_username: "administrator@team4.reca2"
+vcenter_password: "VMware1!"
+
+datacenter_name: "RECA4"
+project_id: "RECA4"
+parent_folder: "RECA4"
+
+esxi_hostname: "esxi-05.team4.reca2"
+esxi_password: "VMware1!"
+esxi_username: "root"
+
+datastore_name: "ESXi-05"
+
+folder_prefix: "RECA4/vm/RECA4/"
+public_net: "VM-192.168.3.x"
+private_net: "int"
+
+iso_folder: '[ESXi-05]\ISO\'
+

@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  vars_files: ./vars.yaml
+
+  tasks: 
+    - name: Create a Project folder
+      community.vmware.vcenter_folder:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        datacenter: '{{ datacenter_name }}'
+        folder_name: '{{ project_id }}'
+        parent_folder: '{{ parent_folder }}'
+        state: present
+        validate_certs: no
+      register: vm_folder_creation_result
+      delegate_to: localhost

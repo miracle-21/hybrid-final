@@ -1,0 +1,97 @@
+---
+- hosts: localhost
+  vars_files: ./vars.yaml
+
+  tasks:
+    - name: Modify Bastion VM Network
+      community.vmware.vmware_guest_network:
+        hostname: "{{ vcenter_hostname }}"
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: 'false'
+        name: "{{ project_id + '-Bastion'}}"
+        network_name: '{{ item.network }}'
+        label: '{{ item.label }}'
+        state: present
+      loop:
+      - { network: "{{ public_net }}", label: "Network adapter 1" }
+      - { network: "{{ private_net }}", label: "Network adapter 2" }
+      delegate_to: localhost
+
+    - name: Modify Untangle VM Network
+      community.vmware.vmware_guest_network:
+        hostname: "{{ vcenter_hostname }}"
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: 'false'
+        name: "{{ project_id + '-Untangle'}}"
+        network_name: '{{ item.network }}'
+        label: '{{ item.label }}'
+        state: present
+      loop:
+      - { network: "{{ public_net }}", label: "Network adapter 1" }
+      - { network: "{{ private_net }}", label: "Network adapter 2" }
+      delegate_to: localhost
+
+    - name: Modify TrueNAS VM Network
+      community.vmware.vmware_guest_network:
+        hostname: "{{ vcenter_hostname }}"
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: 'false'
+        name: "{{ project_id + '-Untangle'}}"
+        network_name: '{{ item.network }}'
+        label: '{{ item.label }}'
+        state: present
+      loop:
+      - { network: "{{ public_net }}", label: "Network adapter 1" }
+      delegate_to: localhost
+
+    - name: Add Disks to Bastion 
+      community.vmware.vmware_guest_disk:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: 'false'
+        datacenter: '{{datacenter_name}}'        
+        name: "{{ project_id + '-Bastion'}}"
+        disk:
+        - size_gb: 200
+          type: thin
+          datastore: '{{ datastore_name }}'
+          state: present
+          scsi_controller: 0
+          unit_number: 1
+          scsi_type: 'paravirtual'
+          disk_mode: 'persistent'
+      delegate_to: localhost
+      register: disk_facts
+
+    - name: Add Disks to Storage (TruneNas)
+      community.vmware.vmware_guest_disk:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: 'false'
+        datacenter: '{{ datacenter_name }}'        
+        name: "{{ project_id + '-TrueNAS'}}"
+        disk:
+        - size_gb: 200
+          type: thin
+          datastore: '{{ datastore_name }}'
+          state: present
+          scsi_controller: 0
+          unit_number: '{{ item }}'
+          scsi_type: 'paravirtual'
+          disk_mode: 'persistent'
+      loop:
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+      delegate_to: localhost
+      register: disk_facts
+

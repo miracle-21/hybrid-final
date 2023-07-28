@@ -1,0 +1,33 @@
+---
+- hosts: localhost
+  vars_files: ./vars.yaml
+
+  tasks: 
+    - name: Create Project Standard Switch
+      community.vmware.vmware_vswitch:
+          hostname: '{{ esxi_hostname }}'
+          username: '{{ esxi_username }}'
+          password: '{{ esxi_password }}'
+          validate_certs: no
+          switch: '{{ project_id }}'
+      delegate_to: localhost
+
+    - name: Waiting 10 seconds for vSwitch creating
+      wait_for:
+        timeout: 10
+      delegate_to: localhost
+
+    - name: Adding Openshift Portgroup
+      community.vmware.vmware_portgroup:
+          hostname: "{{ vcenter_hostname }}"
+          username: "{{ vcenter_username }}"
+          password: "{{ vcenter_password }}"
+          esxi_hostname: "{{ esxi_hostname }}"
+          validate_certs: no
+          switch: "{{ project_id }}"
+          portgroup: "{{ project_id + '-Openshift' }}"
+          security:
+              promiscuous_mode: True
+              mac_changes: True
+              forged_transmits: True
+      delegate_to: localhost
