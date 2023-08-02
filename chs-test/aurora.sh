@@ -3,6 +3,7 @@ sudo -i
 yum update -y
 yum install -y mariadb-server
 systemctl start mariadb
+amazon-linux-extras install -y redis6
 
 yum install -y java-1.8.0-openjdk.x86_64
 yum install -y java-1.8.0-openjdk-devel.x86_64
@@ -26,7 +27,8 @@ cat > /home/tomcat/apache-tomcat-9.0.76/webapps/ROOT/index.jsp << EOF
 <!DOCTYPE html>
 <html>
 <head>
-<title>Keyboard Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Keyboard Data, session-test</title>
 <style>
     table {
     border-collapse: collapse;
@@ -43,6 +45,8 @@ cat > /home/tomcat/apache-tomcat-9.0.76/webapps/ROOT/index.jsp << EOF
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.*" %>
 <%@ page import="javax.sql.*" %>
+<%@ page import="java.text.*"%>
+<%@ page import="java.util.*"%>
 
 <%!
     public Connection getConnection() throws Exception {
@@ -55,7 +59,6 @@ cat > /home/tomcat/apache-tomcat-9.0.76/webapps/ROOT/index.jsp << EOF
     return conn;
     }
 %>
-
 <%
     Connection conn = null;
     Statement stmt = null;
@@ -70,8 +73,8 @@ cat > /home/tomcat/apache-tomcat-9.0.76/webapps/ROOT/index.jsp << EOF
 
 <h1>Keyboard Data</h1>
 
-<table>
-    <tr>
+<table border=1 bordercolor="gray" cellspacing=1 cellpadding=0 width="100%">
+    <tr bgcolor="gray">
     <th>name</th>
     <th>age</th>
     </tr>
@@ -88,11 +91,56 @@ cat > /home/tomcat/apache-tomcat-9.0.76/webapps/ROOT/index.jsp << EOF
     e.printStackTrace();
     }
 %>
+</table>
+<br>
+<table border=1 bordercolor="gray" cellspacing=1 cellpadding=0 width="100%">
+      <tr bgcolor="gray">
+       <td colspan=2 align="center"><font color="white"><b>Session Info</b></font></td>
+      </tr>
+     <tr>
+       <td>Server HostName</td>
+       <td><%=java.net.InetAddress.getLocalHost().getHostName()%></td>
+     </tr>
+     <tr>
+       <td>Server IP</td>
+       <td><%=java.net.InetAddress.getLocalHost().getHostAddress()%></td>
+     </tr>
+     <tr>
+       <td>Request SessionID</td>
+       <td><%=request.getRequestedSessionId()%></td>
+     </tr>
+     <tr>
+       <td>SessionID</td>
+       <td><%=session.getId()%></td>
+     </tr>
+</table>
+</br>
+<%
+ int count = 0;
+ if(session.getAttribute("count") != null)
+ count = (Integer) session.getAttribute("count");
+ count += 1;
+ session.setAttribute("count", count);
+ out.println(session.getId() + " : " + count);
+%>
 </body>
 </html>
 EOF
 
+wget https://github.com/ran-jit/tomcat-cluster-redis-session-manager/releases/download/3.0.3/tomcat-cluster-redis-session-manager.zip
+unzip tomcat-cluster-redis-session-manager.zip
+rm -rf tomcat-cluster-redis-session-manager.zip
+cp tomcat-cluster-redis-session-manager/lib/* /home/tomcat/apache-tomcat-9.0.76/lib/
+cp tomcat-cluster-redis-session-manager/conf/* /home/tomcat/apache-tomcat-9.0.76/conf/
+
+sed -i 's/redis\.hosts=127.0.0.1/redis\.hosts=hbint-redis.tcmsce.clustercfg.apn2.cache.amazonaws.com/g' /home/tomcat/apache-tomcat-9.0.76/conf/redis-data-cache.properties
+sed -i 's/redis\.cluster\.enabled=false/redis\.cluster\.enabled=true/g' /home/tomcat/apache-tomcat-9.0.76/conf/redis-data-cache.properties
+sed -i '/<Context>/a \ \ \ \ <Manager className="tomcat.request.session.redis.SessionManager" />' /home/tomcat/apache-tomcat-9.0.76/conf/context.xml
+sed -i '/<Context>/a \ \ \ \ <Valve className="tomcat.request.session.redis.SessionHandlerValve" />' /home/tomcat/apache-tomcat-9.0.76/conf/context.xml
+sed -i 's/<session-timeout>30<\/session-timeout>/<session-timeout>60<\/session-timeout>/g' /home/tomcat/apache-tomcat-9.0.76/conf/web.xml
+
 echo "export JAVA_HOME=/home/tomcat" | sudo tee -a /etc/profile
 echo "export JRE_HOME=/home/tomcat" | sudo tee -a /etc/profile
 source /etc/profile
+sudo /home/tomcat/apache-tomcat-9.0.76/bin/shutdown.sh
 sudo /home/tomcat/apache-tomcat-9.0.76/bin/startup.sh
