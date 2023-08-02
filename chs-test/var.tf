@@ -11,7 +11,7 @@ variable "cidr" {
 
 variable "tag" {
   type    = string
-  default = "chs"
+  default = "hbinT"
 }
 
 variable "rocidr" {
@@ -19,7 +19,13 @@ variable "rocidr" {
   default = "0.0.0.0/0"
 }
 
-variable "key" {
+variable "akey" {
+  type      = string
+  default   = ""
+  sensitive = true
+}
+
+variable "skey" {
   type      = string
   default   = ""
   sensitive = true
