@@ -51,7 +51,7 @@ cat > /home/tomcat/apache-tomcat-9.0.76/webapps/ROOT/index.jsp << EOF
 <%!
     public Connection getConnection() throws Exception {
     String driver = "software.aws.rds.jdbc.mysql.Driver";
-    String url = "jdbc:mysql:aws://aurora-replica-2.cvyqzm7yoa5l.ap-northeast-2.rds.amazonaws.com:3306/hbinTdb";
+    String url = "jdbc:mysql:aws://aurora-db.cluster-cvyqzm7yoa5l.ap-northeast-2.rds.amazonaws.com:3306/hbinTdb";
     String username = "root";
     String password = "VMware1!";
     Class.forName(driver);
