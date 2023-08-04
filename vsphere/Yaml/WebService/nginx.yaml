@@ -28,4 +28,13 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: public.ecr.aws/r3c7q0e5/test:latest
+        image: 408223505404.dkr.ecr.ap-northeast-2.amazonaws.com/khb-test:latest
+        volumeMounts:
+        - name: persistent-storage
+          mountPath: /static
+      volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+      imagePullSecrets:
+      - name: ecr-credentials

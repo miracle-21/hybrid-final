@@ -28,4 +28,4 @@ spec:
     spec:
       containers:
       - name: tomcat
-        image: tomcat
+        image: public.ecr.aws/e6m3e0t8/tomcat:latest
