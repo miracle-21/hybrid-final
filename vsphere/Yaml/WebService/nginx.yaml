@@ -28,7 +28,14 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: 408223505404.dkr.ecr.ap-northeast-2.amazonaws.com/khb-test:latest
+        image: 408223505404.dkr.ecr.ap-northeast-2.amazonaws.com/nginx:1.0
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 50m 
+            memory: 150Mi
         volumeMounts:
         - name: persistent-storage
           mountPath: /static
@@ -37,4 +44,48 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc
       imagePullSecrets:
-      - name: ecr-credentials
+      - name: nginx-credentials
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+spec:
+  maxReplicas: 10
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx
+  targetCPUUtilizationPercentage: 60
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nginx-cronjob
+spec:
+  schedule: "0 0 */8 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: nginx
+            image: 408223505404.dkr.ecr.ap-northeast-2.amazonaws.com/nginx:1.0
+            resources:
+              limits:
+                cpu: 100m
+                memory: 256Mi
+              requests:
+                cpu: 50m
+                memory: 150Mi
+            volumeMounts:
+            - name: persistent-storage
+              mountPath: /static
+          volumes:
+          - name: persistent-storage
+            persistentVolumeClaim:
+              claimName: nfs-pvc
+          restartPolicy: OnFailure
+          imagePullSecrets:
+          - name: nginx-credentials

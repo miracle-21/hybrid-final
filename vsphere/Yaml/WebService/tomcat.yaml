@@ -28,4 +28,50 @@ spec:
     spec:
       containers:
       - name: tomcat
-        image: public.ecr.aws/e6m3e0t8/tomcat:latest
+        image: 408223505404.dkr.ecr.ap-northeast-2.amazonaws.com/tomcat:latest
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1024Mi
+          requests:
+            cpu: 300m
+            memory: 500Mi
+      imagePullSecrets:
+      - name: tomcat-credentials
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tomcat-hpa
+spec:
+  maxReplicas: 5
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: tomcat
+  targetCPUUtilizationPercentage: 30
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: tomcat-cronjob
+spec:
+  schedule: "0 0 */8 * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: tomcat
+            image: 408223505404.dkr.ecr.ap-northeast-2.amazonaws.com/tomcat:latest
+            resources:
+              limits:
+                cpu: 500m
+                memory: 1024Mi
+              requests:
+                cpu: 300m
+                memory: 500Mi
+          restartPolicy: OnFailure
+          imagePullSecrets:
+          - name: tomcat-credentials
