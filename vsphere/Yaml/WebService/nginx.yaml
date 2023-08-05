@@ -44,7 +44,7 @@ spec:
         persistentVolumeClaim:
           claimName: nfs-pvc
       imagePullSecrets:
-      - name: nginx-credentials
+      - name: ecr-credentials
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
@@ -88,4 +88,4 @@ spec:
               claimName: nfs-pvc
           restartPolicy: OnFailure
           imagePullSecrets:
-          - name: nginx-credentials
+          - name: ecr-credentials

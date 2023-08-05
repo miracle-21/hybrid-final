@@ -37,7 +37,7 @@ spec:
             cpu: 300m
             memory: 500Mi
       imagePullSecrets:
-      - name: tomcat-credentials
+      - name: ecr-credentials
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
@@ -74,4 +74,4 @@ spec:
                 memory: 500Mi
           restartPolicy: OnFailure
           imagePullSecrets:
-          - name: tomcat-credentials
+          - name: ecr-credentials
