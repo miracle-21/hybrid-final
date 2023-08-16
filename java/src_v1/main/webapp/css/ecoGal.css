@@ -1,0 +1,80 @@
+@charset "UTF-8";
+.page_title{
+	padding-bottom:50px;
+	text-align:center;
+	font-size:35px;
+}
+.search_area{
+	width:80%;
+	height:auto;
+	margin:0 auto;
+	border-top:3px solid green;
+	text-align:center;
+}
+.month_area{
+	display:inline-block;
+	width:7.5%; 
+	height:30px;
+	border-bottom:1px solid gray;
+	background-color:rgb(248,248,248);
+	margin-left:3px;
+	font-weight:bold;
+	text-align:center;
+	padding-top:10px;
+	cursor:pointer;
+}
+.month_area:hover{
+
+	background-color:green;
+	color:white;
+}
+.main_area{
+	width:80%;
+	height:auto;
+	margin:0 auto;
+	margin-top:40px;
+	text-align:center;
+	border-bottom:1px solid black;
+}
+.month_info{
+	width:100%;
+	height:40px;
+	font-weight:bold;
+	text-align:center;
+	padding-top:15px;
+	background-color:rgb(248,248,248);
+	border-top:2px solid black;
+}
+.post_btn{
+	display:inline-block;
+	position:absolute;
+	right:12%;
+	width:80px;
+	height:40px;
+	cursor:pointer;
+	background-color:rgb(248,248,248);
+	border:1px solid gray;
+	border-radius:4px;
+}
+.post_btn:hover{
+	font-weight:bold;
+	border:2px solid black;
+}
+.list_area{
+	margin:20px;
+	cursor:pointer;
+	display:inline-block;
+}
+.list_area img{
+	width:344px;
+	height:225px;
+}
+.kname_area{
+	text-align:center;
+	font-weight:bold;
+}
+.exspace_area{
+	text-align:left;
+	font-weight:bold;
+	font-size:20px;
+}

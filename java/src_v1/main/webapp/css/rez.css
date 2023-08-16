@@ -1,0 +1,61 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  background-color: hsl(0, 0%, 98%);
+  color: #333;
+  font: 100% / normal sans-serif;
+}
+
+main {
+  margin: 0 auto;
+  padding: 4rem 0;
+  width: 90%;
+  max-width: 60rem;
+}
+
+form {
+  box-sizing: border-box;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: hsl(0, 0%, 100%);
+  border: 4px solid hsl(0, 0%, 90%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+input[type="text"]{
+  height: auto;  
+  line-height: normal; 
+  padding: .8em .5em; 
+}
+
+.textbox {position: relative;}
+
+.textbox label {
+  position: absolute;
+  top: 1px;  /* input 요소의 border-top 설정값 만큼 */
+  left: 1px;  /* input 요소의 border-left 설정값 만큼 */
+  padding: .8em .5em;  /* input 요소의 padding 값 만큼 */
+  color: #999;
+  cursor: text;
+}
+
+.textbox input[type="text"],
+.textbox input[type="password"] {
+  width: 100%;  /* 원하는 너비 설정 */ 
+  height: auto;  /* 높이값 초기화 */
+  line-height : normal;  /* line-height 초기화 */
+  padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+  font-family: inherit;  /* 폰트 상속 */
+  border: 1px solid #999;
+  border-radius: 0;  /* iSO 둥근모서리 제거 */
+  outline-style: none;  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  -webkit-appearance: none;  /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none;
+  appearance: none;
+}

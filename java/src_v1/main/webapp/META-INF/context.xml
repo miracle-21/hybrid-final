@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+        <Resource name="jdbc/mysql"
+            auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.mysql.jdbc.Driver"
+            maxWait="5000"
+            username="admin"
+            password="VMware1!"
+            testOnBorrow="true"
+            url="jdbc:mysql://database-1.cvyqzm7yoa5l.ap-northeast-2.rds.amazonaws.com:3306/test"/>
+</Context>

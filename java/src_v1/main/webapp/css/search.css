@@ -1,0 +1,83 @@
+@charset "UTF-8";
+    body{
+        line-height:4em;        
+        font-family:"맑은 고딕";
+	}
+    ul, li{ 
+        list-style:none;
+        text-align:center;
+        padding:0;
+        margin:0;
+	}
+
+    #mainWrapper{
+        width: 1400px;
+        margin: 0 auto; /*가운데 정렬*/
+    }
+
+    #mainWrapper > ul > li:first-child {
+        text-align: center;
+        font-size:20pt;
+        height:60px;
+        vertical-align:middle;
+        line-height:50px;
+}
+
+    #ulTable {margin-top:0px;}
+    
+
+    #ulTable > li:first-child > ul > li {
+        background-color:#037a4e;
+        font-weight:bold;
+        text-align:center;
+}
+
+    #ulTable > li > ul {
+        clear:both;
+        padding:0px auto;
+        position:relative;
+        min-width:40px;
+        
+
+}
+
+    #ulTable > li > ul > li { 
+        float:left;
+        font-size:16pt;
+        border-bottom:1px solid silver;
+        vertical-align:baseline;
+        cursor:pointer;
+}    
+
+    #ulTable > li > ul > li:first-child               {width:12%;} /*No 열 크기*/
+    #ulTable > li > ul > li:first-child +li           {width:20%;} /*제목 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li        {width:43%;} /*작성일 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li+li     {width:15%;} /*작성자 열 크기*/
+    #ulTable > li > ul > li:first-child +li+li+li+li{width:10%;} /*조회수 열 크기*/
+
+    #divPaging {
+          clear:both; 
+        margin:0 auto; 
+        width:220px; 
+        height:20px;
+}
+
+    #divPaging > div {
+        float:left;
+        width: 30px;
+        margin:0 auto;
+        text-align:center;
+}
+
+    #liSearchOption {clear:both;}
+    #liSearchOption > div {
+        margin:0 auto; 
+        margin-top: 30px; 
+        width:auto; 
+        height:100px;
+
+}
+
+    .left {
+        text-align : left;
+}

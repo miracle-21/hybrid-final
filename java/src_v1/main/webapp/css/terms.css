@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+header {
+	display: flex;
+	justify-content: center;
+}
+.join-process{display:flex;}
+.join-process li{flex:1; height:60px; }
+.join-process li p{position:relative; display:flex; justify-content:center; align-items:center; height:100%; background-color:#f7f7f7; font-size:17px; font-weight:400; color:#666; border:1px solid #cdcdcd; line-height:1; transition:all .4s;}
+.join-process li .active{font-weight:600; color:#fff; background-color:#037a4e; border-color:#037a4e;}
+.join-process li:not(:last-child) p::after{content:''; position:absolute; right:-22px; top:50%; z-index:10; display:block; width:42px; height:42px; transform:translateY(-50%) rotate(45deg); border-width:2px 2px 0 0; border-style:solid; border-color:#cdcdcd; background-color:#f7f7f7;}
+.join-process li:not(:last-child) .active::after{border-color:#037a4e; background-color:#037a4e;}
+.join-process li p::before{content:''; display:block; min-width:17px; height:100%; background-repeat:no-repeat; background-position:center center; margin-right:8px;}
+
+.join-wrap{}
+.join-wrap input[type="checkbox"] + label{font-size:18px;}
+.join-wrap .sub-title{}
+.join-wrap .sub-txt{display:flex; align-items:center; justify-content:space-between; margin:0 0 20px;}
+.join-wrap .sub-txt .sub-iconTitle{font-size:22px; font-weight:600; color:#222; line-height:1;}
+.join-wrap{}
+.join-wrap .btn-wrap a{display:flex; justify-content:center; align-items:center; width:120px; height:50px; border-radius:3px; line-height:1;}
+.join-wrap .btn-wrap a:not(:last-child){margin-right:10px;}
+.btn-normal{background-color:#666; color:#fff; font-weight:600;}
+.btn-cancel{border:1px solid #cdcdcd; color:#666; font-weight:400; background-color:#e5e5e5;}
+
+.sub-title{display:flex; align-items:flex-start; font-size:26px; color:#222; font-weight:600; line-height:1.3; letter-spacing:-0.02rem;}
+.sub-title::before{content:''; display:block; margin-top:10px; margin-right:10px; min-width:15px; height:16px; background:url('/resources/nie/images/layout/subTitleIcon.png') no-repeat 0 0; }
+.sub-title.yellow::before{background:url('/resources/nie/images/layout/subTitleIcon_y.png') no-repeat 0 0;}
+.sub-title.green::before{background:url('/resources/nie/images/layout/subTitleIcon_yg.png') no-repeat 0 0;}
+.sub-title.orange::before{background:url('/resources/nie/images/layout/subTitleIcon_o.png') no-repeat 0 0;}
+.sub-title.blue::before{background:url('/resources/nie/images/layout/subTitleIcon_b.png') no-repeat 0 0;}
+
+.join-content .agree-check{}
+.join-content .agree-check input{}
+.join-content{background-color:#f7f7f7; border-top:2px solid #333; border-bottom:1px solid #cdcdcd; padding:40px;}
+.join-content .sub-txt{display:flex; align-items:center; justify-content:space-between; font-size:22px; font-weight:600; color:#222; line-height:1;}
+.join-content .sub-iconTitle{font-size:22px; font-weight:600; color:#222; line-height:1;}
+.join-content .agree-check{line-height:1;}
+
+.board-btn{margin:30px 0 0; display:flex; justify-content:center;}
+.board-btn__item{display:flex; width:120px; height:50px; font-size:16px; border-radius:3px; align-items:center; justify-content:center; text-align:center;}
+.board-btn__item:not(:last-child){margin-right:10px;}
+.board-btn__item.list{color:#666; border:1px solid #ccc;}
+.board-btn__item.write{background:#666; color:#fff;}
+.board-btn__item.cancel{background:#e5e5e5; border:1px solid #cdcdcd; color:#666;}
