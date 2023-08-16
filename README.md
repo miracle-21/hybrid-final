@@ -71,6 +71,7 @@
 
 ## 3. 구성 과정
 세부 내용은 [보고서.docx](https://github.com/miracle-21/hybrid-final/blob/main/%5Bhybrid-final%5D%EB%B3%B4%EA%B3%A0%EC%84%9C.docx) 참조
+![](https://velog.velcdn.com/images/miracle-21/post/f73d96b8-444f-46fb-8f80-40e2aa103539/image.png)
 
 ### 3-1. Private Cloud(vSphere)
 #### 3-1-1. Domain Controller 설치
