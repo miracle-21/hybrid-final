@@ -1,0 +1,48 @@
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: whatap
+users:
+- system:serviceaccount:whatap-monitoring:whatap
+priority: 10
+allowHostPorts: true
+allowHostPID: true
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- hostPath
+- secret
+seLinuxContext:
+  type: MustRunAs
+  seLinuxOptions:
+    user: "system_u"
+    role: "system_r"
+    type: "spc_t"
+    level: "s0"
+allowHostDirVolumePlugin: true
+allowHostIPC: false
+allowHostNetwork: false
+allowPrivilegedContainer: false
+allowedFlexVolumes: []
+defaultAddCapabilities: []
+fsGroup:
+  type: MustRunAs
+readOnlyRootFilesystem: false
+runAsUser:
+  type: MustRunAsRange
+supplementalGroups:
+  type: RunAsAny
+seccompProfiles: []
+requiredDropCapabilities: []
+allowedCapabilities: []
+runAsUser:
+  type: RunAsAny
+ports:
+  - containerPort: 6600
+    name: whatap-master-agent-port
+    protocol: TCP
+  - containerPort: 6800
+    name: whatap-confbase-port
+    protocol: TCP  
+
