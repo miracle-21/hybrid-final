@@ -23,7 +23,7 @@
 
 |**서비스**|생태 체험 프로그램|
 | :-: | - |
-|**참조**|<p>Github: https://github.com/IDontHaveBrain/project04</p><p>국립생태원: https://www.nie.re.kr/reserve/main/mainPage.do;jsessionid=63B8B8F8B07EFDD12B32EB9A24198799.nie\_was</p>|
+|**참조 URL**|<p>[Github](https://github.com/IDontHaveBrain/project04)</p><p>[국립생태원](https://www.nie.re.kr/reserve/main/mainPage.do;jsessionid=63B8B8F8B07EFDD12B32EB9A24198799.nie\_was)</p>|
 |**발단**|근래 급격한 트래픽 증가로 인한 원활한 서비스 제공 환경 요구|
 |**목적**|고가용성, 내결함성을 만족하는 확장 가능한 유연한 서비스 제공|
 |**기대효과**|<p>1\. 일관되고 예상가능한 시스템 운영으로 업무 효율성 증가</p><p>2\. 안전하고 빠른 서비스를 제공할 수 있는 환경</p><p>3\. 실시간 모니터링, 신속한 대응으로 서비스 성능 유지</p>|
