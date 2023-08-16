@@ -1,0 +1,56 @@
+additionalTrustBundlePolicy: Proxyonly
+apiVersion: v1
+baseDomain: team4.reca2
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 3
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: team4
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    apiVIPs:
+    - 10.0.0.11
+    failureDomains:
+    - name: generated-failure-domain
+      region: generated-region
+      server: 192.168.3.100
+      topology:
+        computeCluster: /Datacenter/host/team4
+        datacenter: Datacenter
+        datastore: /Datacenter/datastore/ESXi-05
+        networks:
+        - int
+        resourcePool: /Datacenter/host/team4//Resources
+      zone: generated-zone
+    ingressVIPs:
+    - 10.0.0.21
+    vcenters:
+    - datacenters:
+      - Datacenter
+      password: VMware1!
+      port: 443
+      server: 192.168.3.100
+      user: administrator@team4.reca2
+publish: External
+pullSecret: '{"auths":{"cloud.openshift.com":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfZjE4ZTI3MzE4NGVmNDY4NThmODgzYmJjY2Y3YTEyMmM6NFhFWDVFUUJEWVkwRlJTQ01CQVRMME42MjVVSkUxWlNXSFc4Vk1JSUdURkJaRzdEOU1JUTQ0QlhKUjE4R1BNVA==","email":"blueblue00@gmail.com"},"quay.io":{"auth":"b3BlbnNoaWZ0LXJlbGVhc2UtZGV2K29jbV9hY2Nlc3NfZjE4ZTI3MzE4NGVmNDY4NThmODgzYmJjY2Y3YTEyMmM6NFhFWDVFUUJEWVkwRlJTQ01CQVRMME42MjVVSkUxWlNXSFc4Vk1JSUdURkJaRzdEOU1JUTQ0QlhKUjE4R1BNVA==","email":"blueblue00@gmail.com"},"registry.connect.redhat.com":{"auth":"fHVoYy1wb29sLWQ3NzRmMGFjLWM5MTQtNGRhNy1hYWRlLTQ1MDZhOGI1NjYyNjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTNZelpsTnpkbE1Ea3lOV1UwT1RrMllXRmtNall3TnpKa09XVmxZakEzTUNKOS5sYndrVFRrcDRqclhJMDFjU2xEUTlDT0t1NXplVTZNNkpjSFVYX1B4QnF1dHQxOGlreFo2UmcxT3FNOWtsUF9tNG1wQWVvXzl3U1owcl9vQW1ySU9EckhzSVhpWHpTM1c0R09CM0d1RHd3dElmNU02Zkt4UDY3Nm1uVkRqeEwxX0c0aWlITjdlNlFBQ3l6THR5dnNRUnNOUjFEWFZBdUtVN2lTbDgtVjUtOTctcG9VdlFrY0tDZzAzaVU0ZE9fUFF2Z01mSXhnSllUZWZTQkc0dmVzNzBYclBJWkMtWFJacHo0VUZwM2FNX1p3UVZwVUhSUWotcnYxMmw1c3BSOVZra0hyZ0tELWZpUVJNU25yWWdBSkl3aV9DSm1ZdFBZMl9YTVNNSFNQRWtOWnljNGxqdnE0Y1JYb2kxaVZiX1M1RUtrNzQ1OTRnVm10a1NnSVd0YUx2LTFLblhiZlBXRVR0VlpIQXpSUWR6QU9LZkplMVZLXzZMeEduSFdxNHpBZ05BVllwWGZKSThGVVpna3pqLXd0S2hmVGt1Uk51NVdOZDRDeUNmcGNtUURIYjBOMC1FSUtqTEVsSU9LbTY3N1pxOWhlLTZSUzhqbThiSjNpNnZqQTJMUlNYQW4tbG8wZm1ZMndDODdHN2RGUFNTVmJORHhoR3ZWNjZRWUJaMDUtSTdRajBOZzNzUTJud0NDNDZrcTBPTTFQS3ZrU3pRVTFQZXJMSk81MFdKd0NVblpYeHZuVS0zM0N6dWNPdFdnRkZfRjBaUnROcFptOEN4YmJsakhpaHR6NjA0WEtMd1ZwcXVEUDI2V2JmQ1ZQMmUxa2xJOEp2UjFaR3VhVjdXSDBzYjRZUFFURWVVSWdqdUlEQjFhbnVoLUtyNnVuSm41M09IRWxZUDVUdGxUTQ==","email":"blueblue00@gmail.com"},"registry.redhat.io":{"auth":"fHVoYy1wb29sLWQ3NzRmMGFjLWM5MTQtNGRhNy1hYWRlLTQ1MDZhOGI1NjYyNjpleUpoYkdjaU9pSlNVelV4TWlKOS5leUp6ZFdJaU9pSTNZelpsTnpkbE1Ea3lOV1UwT1RrMllXRmtNall3TnpKa09XVmxZakEzTUNKOS5sYndrVFRrcDRqclhJMDFjU2xEUTlDT0t1NXplVTZNNkpjSFVYX1B4QnF1dHQxOGlreFo2UmcxT3FNOWtsUF9tNG1wQWVvXzl3U1owcl9vQW1ySU9EckhzSVhpWHpTM1c0R09CM0d1RHd3dElmNU02Zkt4UDY3Nm1uVkRqeEwxX0c0aWlITjdlNlFBQ3l6THR5dnNRUnNOUjFEWFZBdUtVN2lTbDgtVjUtOTctcG9VdlFrY0tDZzAzaVU0ZE9fUFF2Z01mSXhnSllUZWZTQkc0dmVzNzBYclBJWkMtWFJacHo0VUZwM2FNX1p3UVZwVUhSUWotcnYxMmw1c3BSOVZra0hyZ0tELWZpUVJNU25yWWdBSkl3aV9DSm1ZdFBZMl9YTVNNSFNQRWtOWnljNGxqdnE0Y1JYb2kxaVZiX1M1RUtrNzQ1OTRnVm10a1NnSVd0YUx2LTFLblhiZlBXRVR0VlpIQXpSUWR6QU9LZkplMVZLXzZMeEduSFdxNHpBZ05BVllwWGZKSThGVVpna3pqLXd0S2hmVGt1Uk51NVdOZDRDeUNmcGNtUURIYjBOMC1FSUtqTEVsSU9LbTY3N1pxOWhlLTZSUzhqbThiSjNpNnZqQTJMUlNYQW4tbG8wZm1ZMndDODdHN2RGUFNTVmJORHhoR3ZWNjZRWUJaMDUtSTdRajBOZzNzUTJud0NDNDZrcTBPTTFQS3ZrU3pRVTFQZXJMSk81MFdKd0NVblpYeHZuVS0zM0N6dWNPdFdnRkZfRjBaUnROcFptOEN4YmJsakhpaHR6NjA0WEtMd1ZwcXVEUDI2V2JmQ1ZQMmUxa2xJOEp2UjFaR3VhVjdXSDBzYjRZUFFURWVVSWdqdUlEQjFhbnVoLUtyNnVuSm41M09IRWxZUDVUdGxUTQ==","email":"blueblue00@gmail.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCtVVrlKDBZKeHkIambDk1wLluDErpUPBb/GYOpQ2dJt79CDr5jIiyL10mdlTIYT0KpDN5GlIcaCpQezPFu1k7T90jOet1r98LDP10lVY4juoMUQWbQcljk94JEQ0NHlof3BKj5oK3IX4Q11UoUTJ66ewGNAQ+DcaFOUtgmClBvDDVay1STrLfOOZhx2+F75z9vWL4kb1weJfbxnAf575hjP63oRuR/ykYNFwktcZeM+z6PNZryrPuaEqRuVdxmMO6MkVYL2XRdAQlslnpIxWs/p6XT2VuEdgckhwIF/8VfKKTB10LiV32gOzMDXBg3AyMiTMt/NolH6C2SnLu3SxlP root@bastion
